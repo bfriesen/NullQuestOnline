@@ -1,0 +1,20 @@
+﻿@model NullQuestOnline.Models.Character
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Request.IsAuthenticated)
+{
+    @: You are logged in as @User.Identity.Name
+    @:<br/>
+    @Html.ActionLink("Log out", "Logout", "Account")
+    @:<br/>
+    @Html.ActionLink("Play", "Index", "Main")
+}
+else
+{
+    @Html.ActionLink("Log In", "Login", "Account")
+}

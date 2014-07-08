@@ -1,0 +1,13 @@
+﻿@model NullQuestOnline.Models.Character
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.Name, "Enter your character name: ")
+    @Html.TextBoxFor(m => m.Name)
+    <input type="submit" value="Submit" />
+}

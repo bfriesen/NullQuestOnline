@@ -137,6 +137,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -193,6 +195,53 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\bfriesen.jpg" />
+    <Content Include="img\browsers.gif" />
+    <Content Include="img\flames.gif" />
+    <Content Include="img\glyphicons-halflings-white.png" />
+    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\microfab.gif" />
+    <Content Include="img\mvp.png" />
+    <Content Include="img\obalas.jpg" />
+    <Content Include="img\progress.gif" />
+    <Content Include="img\rainbow.gif" />
+    <Content Include="img\stars.gif" />
+    <Content Include="img\test\7upspot.gif" />
+    <Content Include="img\test\americanflag.gif" />
+    <Content Include="img\test\community.gif" />
+    <Content Include="img\test\computer-01.gif" />
+    <Content Include="img\test\computer.gif" />
+    <Content Include="img\test\construction.gif" />
+    <Content Include="img\test\counter.gif" />
+    <Content Include="img\test\counter2.gif" />
+    <Content Include="img\test\divider.gif" />
+    <Content Include="img\test\divider1.gif" />
+    <Content Include="img\test\divider2.gif" />
+    <Content Include="img\test\divider3.gif" />
+    <Content Include="img\test\divider4.gif" />
+    <Content Include="img\test\drudgesiren.gif" />
+    <Content Include="img\test\emailme.gif" />
+    <Content Include="img\test\funky.gif" />
+    <Content Include="img\test\geocities.jpg" />
+    <Content Include="img\test\hacker.gif" />
+    <Content Include="img\test\heart.gif" />
+    <Content Include="img\test\hot.gif" />
+    <Content Include="img\test\ie_logo.gif" />
+    <Content Include="img\test\mailkitten.gif" />
+    <Content Include="img\test\mchammer.gif" />
+    <Content Include="img\test\new.gif" />
+    <Content Include="img\test\new2.gif" />
+    <Content Include="img\test\noframes.gif" />
+    <Content Include="img\test\notepad.gif" />
+    <Content Include="img\test\ns_logo.gif" />
+    <Content Include="img\test\sign-in.gif" />
+    <Content Include="img\test\spinningearth.gif" />
+    <Content Include="img\test\underconstruction.gif" />
+    <Content Include="img\test\wabwalk.gif" />
+    <Content Include="img\test\webtrips.gif" />
+    <Content Include="img\test\yahooweek.gif" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -208,6 +257,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\mousetrap.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -234,6 +286,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_2ColLayout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootswatch.less" />
+    <Content Include="Content\variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

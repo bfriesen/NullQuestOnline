@@ -1,61 +1,75 @@
 ﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
-header, footer, nav, section {
-    display: block;
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-
-/* Styles for basic forms
------------------------------------------------------------*/
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
-}
-
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
 textarea {
-    min-height: 75px;
+    max-width: 280px;
 }
 
-.editor-label {
-    margin: 1em 0 0 0;
+/* Main table */
+table.main-table, table.main-table tr td {
+    border-width: 4px;
+    border-style: solid;
+    border-color: lightgray;
+    min-height: 600px;
+    vertical-align: top;
+    background-color: #222222;
+    font-family: monospace;
+    padding: 5px;
 }
 
-.editor-field {
-    margin: 0.5em 0 0 0;
+/* Today's date area */
+#datebox {
+    font-size: 32px;
 }
 
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error {
-    color: #f00;
+#datebox #month {
+    background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,26,0,1) 26%, rgba(221,0,0,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(26%,rgba(255,26,0,1)), color-stop(100%,rgba(221,0,0,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,26,0,1) 26%,rgba(221,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,26,0,1) 26%,rgba(221,0,0,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,26,0,1) 26%,rgba(221,0,0,1) 100%); /* IE10+ */
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,26,0,1) 26%,rgba(221,0,0,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#dd0000',GradientType=1 ); /* IE6-9 */
+    float: left;
+    /*border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: white;*/
 }
 
-.field-validation-valid {
-    display: none;
+#datebox #month div {
+    padding: 15px 10px 15px 80px;
+    color: black;
 }
 
-.input-validation-error {
-    border: 1px solid #f00;
-    background-color: #fee;
-}
+#datebox #day {
+    background-color: black;
+    text-align: left;
+    width: 100px;
+    float: right;
+    }
 
-.validation-summary-errors {
-    font-weight: bold;
-    color: #f00;
-}
+#datebox #day div {
+    padding: 15px 10px;
+    color: white;
+    }
 
-.validation-summary-valid {
-    display: none;
+#datebox #year {
+    text-align: right;
+    margin-right: 0.25em;
+    margin-top: 0.9em;
+    font-size: 78px;
+    font-family: serif;
+    opacity: 0.4;
+    color: aqua;
 }

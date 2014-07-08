@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="main-table">
+    <tr>
+        <td style="min-width: 200px;">@RenderSection("left", required: true)</td>
+        <td style="width: 100%">@RenderSection("right", required: true)</td>
+    </tr>
+</table>

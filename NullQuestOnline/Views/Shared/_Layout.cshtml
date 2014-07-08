@@ -2,15 +2,67 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "brand" })
+                <div class="nav-collapse" id="main-menu">
+                    <ul class="nav" id="main-menu-left">
+                        <li><a href="@Url.Action("Index", "MainMenu")">&raquo; <blink style="color: red; font-weight: bold; font-size: 1.2em;">Play Now!</blink> &laquo;</a></li>
+                        <li><a href="http://www.websitegoodies.com/guestbook.php?a=view&id=1329248" target="_blank"><img class="pull-left" style="margin-top: -5px" src="~/img/test/hot.gif">Guestbook</a></li>
+                        <li><a href="@Url.Action("About", "Home")"><img class="pull-left" style="margin-top: -3px" src="~/img/test/new.gif" /> About</a></li>
+                        <li><a href="https://github.com/bfriesen/NullQuestOnline" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/bfriesen/NullQuest" target="_blank">NullQuest for DOS PC</a></li>
+                    </ul>
+                    <ul class="nav pull-right" id="main-menu-right">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>
+                @*<img src="~/img/browsers.gif" />*@
+                <img src="~/img/test/ie_logo.gif" />
+                <img src="~/img/test/ns_logo.gif" />
+
+                &copy; @DateTime.Now.AddYears(-20).Year - NullQuest Online
+                <img src="~/img/test/counter2.gif">
+            </p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/mousetrap.min.js")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(function () {
+            $('a.key-option').each(function (i, el) {
+                var key = $(el).attr('data-key');
+                var href = $(el).attr('href');
+                Mousetrap.bind(key, function() {
+                    window.location = href;
+                });
+            });
+        });
+    </script>
 </body>
 </html>

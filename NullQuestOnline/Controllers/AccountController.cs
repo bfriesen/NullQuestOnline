@@ -18,7 +18,7 @@ namespace NullQuestOnline.Controllers
 
             if (returnUrl == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Town");
             }
 
             return Redirect(returnUrl);

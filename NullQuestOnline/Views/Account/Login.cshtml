@@ -1,13 +1,32 @@
 ﻿@model NullQuestOnline.Models.Character
 
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Play Online";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Name, "Enter your character name: ")
-    @Html.TextBoxFor(m => m.Name)
-    <input type="submit" value="Submit" />
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="loginForm">
+    @using (Html.BeginForm(null, null, new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "well form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Log in Form</legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(m => m.Name, "Enter your character name: ")
+                    @Html.TextBoxFor(m => m.Name)
+                </li>
+            </ol>
+            <button type="submit" class="btn">Log in</button>
+        </fieldset>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

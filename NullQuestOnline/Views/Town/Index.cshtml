@@ -1,0 +1,21 @@
+﻿@using NullQuestOnline.Helpers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_2ColLayout.cshtml";
+}
+
+<h2>HELLO</h2>
+
+@section left
+{
+    @Html.KeyOptions(null,
+        HtmlHelpers.KeyedOption.Create('1', "Tavern", @Url.Action("Tavern", "Town")),
+        HtmlHelpers.KeyedOption.Create('2', "Dungeon", @Url.Action("Index", "Dungeon"))
+    )
+}
+
+@section right
+{
+    howru
+}

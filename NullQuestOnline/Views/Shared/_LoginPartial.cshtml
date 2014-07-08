@@ -6,7 +6,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome, <u>@User.Identity.Name</u>! <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li class="divider"></li>
-            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

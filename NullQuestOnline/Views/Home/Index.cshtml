@@ -1,20 +1,42 @@
-﻿@model NullQuestOnline.Models.Character
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Home Page";
 }
 
-<h2>Index</h2>
+<div id="datebox" style="float:right;">
+    <div id="day">
+        <div>@DateTime.Now.ToString("dd").Aggregate(string.Empty, (c, i) => c + i + ' ').ToUpper()</div>
+    </div>
+    <div id="month">
+        <div>@DateTime.Now.ToString("MMMM").Aggregate(string.Empty, (c, i) => c + i + ' ').ToUpper()</div>
+    </div>
+    <div id="year">@DateTime.Now.AddYears(-20).Year</div>
+</div>
 
-@if (Request.IsAuthenticated)
-{
-    @: You are logged in as @User.Identity.Name
-    @:<br/>
-    @Html.ActionLink("Log out", "Logout", "Account")
-    @:<br/>
-    @Html.ActionLink("Play", "Index", "Main")
-}
-else
-{
-    @Html.ActionLink("Log In", "Login", "Account")
-}
+<div class="hero-unit">
+    <h1>Null Quest<p style="font-style: italic; color: red">..Online</p></h1>
+    @*<p class="lead">NullQuest Online is the <b>NEXT</b> generation of gaming</p>*@
+    <marquee>NullQuest Online is the <b>NEXT</b> generation of gaming</marquee>
+    <p><a href="@Url.Action("Index", "Town")" class="btn btn-primary btn-large">Play now! &raquo;</a></p>
+</div>
+
+@*<div class="row">
+        <div class="span4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="span4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="span4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@

@@ -20,6 +20,18 @@
         &raquo; <span style="color: orange; font-weight: bold;">@Model.DungeonName</span> &laquo;<br />
         <span style="font-size: 0.8em; color: white;">A level <span style="font-size: 1.2em; color: yellow; font-weight: bold;">@Model.DungeonLevel</span> dungeon</span>
     </h4>
+
+    @if (Model.Monster == null)
+    {
+        @Model.FluffText
+    }
+    else
+    {
+        <span style="text-align: center;">
+            <br />
+            You see: <span style="font-size: 1.4em; font-weight: bold; color: white;">@Model.Monster.Name</span> (<span style="color: @Html.ColorPercentage((double)Model.Monster.CurrentHitPoints / Model.Monster.MaxHitPoints, "#FF0000", "#00FF00")">@Model.Monster.GetDescription()</span>)
+        </span>
+    }
 }
 
 @section bottomright

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -66,6 +68,25 @@ namespace NullQuestOnline.Helpers
                         };
 
             return html.DropDownListFor(expression, items, string.Empty, null);
+        }
+
+        public static MvcHtmlString ColorPercentage(this HtmlHelper helper, double percentage, string zeroColor, string fullColor)
+        {
+            var zero = ColorTranslator.FromHtml(zeroColor);
+            var full = ColorTranslator.FromHtml(fullColor);
+            return new MvcHtmlString(
+                ColorTranslator.ToHtml(
+                    Color.FromArgb(
+                        Step(percentage, zero.A, full.A),
+                        Step(percentage, zero.R, full.R),
+                        Step(percentage, zero.G, full.G),
+                        Step(percentage, zero.B, full.B)
+                )));
+        }
+
+        private static int Step(double percentage, int bottom, int top)
+        {
+            return (int) (bottom + (percentage*(top - bottom)));
         }
     }
 }

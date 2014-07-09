@@ -43,6 +43,8 @@ namespace NullQuestOnline.Models
         [XmlArrayItem("Boss")]
         public List<string> BossesDefeated { get; set; }
 
+        public Monster CurrentEncounter { get; set; }
+
         public void SetRequiredNumberOfMonstersInCurrentDungeonLevelBeforeBoss()
         {
             NumberOfMonstersDefeatedInCurrentDungeonLevel = 0;

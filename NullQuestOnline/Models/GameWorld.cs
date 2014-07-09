@@ -26,6 +26,7 @@ namespace NullQuestOnline.Models
                 Character = new Character()
                 {
                     Name = characterName,
+                    Level = 1,
                     PowerRoll = 9 + Dice.Roll(4, 4)
                 },
                 CurrentDungeonLevel = 1,
@@ -54,7 +55,7 @@ namespace NullQuestOnline.Models
 
         public string GetCurrentDungeonName()
         {
-            return dungeonNameGenerator.GenerateName(CurrentDungeonLevel);
+            return dungeonNameGenerator.GenerateName(Character.Name, CurrentDungeonLevel);
         }
     }
 }

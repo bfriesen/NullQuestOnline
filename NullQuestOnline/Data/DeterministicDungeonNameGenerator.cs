@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NullQuestOnline.Data
 {
@@ -14,9 +15,9 @@ namespace NullQuestOnline.Data
             SetupWordLists();
         }
 
-        public string GenerateName(int dungeonLevel)
+        public string GenerateName(string characterName, int dungeonLevel)
         {
-            var rng = new Random(dungeonLevel);
+            var rng = new Random(dungeonLevel + 20 * (characterName.Sum(x => x)));
 
             var format = rng.Next(1, 21);
             string word = "";

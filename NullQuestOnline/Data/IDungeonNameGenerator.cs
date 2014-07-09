@@ -2,6 +2,6 @@
 {
     public interface IDungeonNameGenerator
     {
-        string GenerateName(int dungeonLevel);
+        string GenerateName(string characterName, int dungeonLevel);
     }
 }

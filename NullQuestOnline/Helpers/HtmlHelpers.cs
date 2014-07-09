@@ -88,5 +88,15 @@ namespace NullQuestOnline.Helpers
         {
             return (int) (bottom + (percentage*(top - bottom)));
         }
+
+        public static MvcHtmlString CreateNbspOffset(this HtmlHelper helper, int length)
+        {
+            return new MvcHtmlString(string.Join("", Enumerable.Repeat("&nbsp;", length)));
+        }
+
+        public static MvcHtmlString CreateOldStyleProgressBar(this HtmlHelper helper, int length, double ratio)
+        {
+            return new MvcHtmlString(string.Format("{0}", new string('#', Math.Max(0, Convert.ToInt32(Math.Ceiling(ratio * 10)))).PadRight(10)).Replace(" ", "&nbsp;"));
+        }
     }
 }

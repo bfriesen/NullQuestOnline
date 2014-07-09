@@ -1,6 +1,21 @@
-﻿@{
+﻿@using NullQuestOnline.Helpers
+@{
     ViewBag.Title = "Tavern";
     Layout = "~/Views/Shared/_2ColLayout.cshtml";
 }
 
-<h2>Tavern</h2>
+@section left
+{
+    @Html.KeyOptions(null,
+        HtmlHelpers.KeyedOption.Create('1', "Back to Town", @Url.Action("Index", "Town"))
+    )
+}
+
+@section right
+{
+    <h4>You have entered the Tolbooth Tavern</h4>
+
+    <p>You have regained your energy and your game has been saved.</p>
+    
+    Image of Tolbooth Tavern
+}

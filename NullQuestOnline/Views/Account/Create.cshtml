@@ -10,7 +10,7 @@
 {
     @Html.Hidden("characterName", Model.Name)
     <p>Your character will be named <strong>@Model.Name</strong>.</p>
-    <p>Starting power: <strong>@Model.CharacterPowerRoll</strong> (max 25 but 20+ is good)</p>
+    <p>Starting power: <strong>@Model.PowerRoll</strong> (max 25 but 20+ is good)</p>
     <button type="submit" name="command" class="btn" value="accept">Accept</button>
     <button type="submit" name="command" class="btn" value="reroll">Roll Again</button>
 }

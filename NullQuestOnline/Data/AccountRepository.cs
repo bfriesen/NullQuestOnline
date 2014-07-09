@@ -8,10 +8,10 @@ namespace NullQuestOnline.Data
 {
     public class AccountRepository : IAccountRepository
     {
-        private static readonly XmlSerializer<Character> Serializer;
+        private static readonly XmlSerializer<GameWorld> Serializer;
         static AccountRepository()
         {
-            Serializer = new XmlSerializer<Character>(options => options.SetRootElementName("Character").Indent());
+            Serializer = new XmlSerializer<GameWorld>(options => options.SetRootElementName("Character").Indent());
         }
 
         private readonly string saveFolder;
@@ -23,7 +23,7 @@ namespace NullQuestOnline.Data
 
         public bool IsCharacterCreated(string characterName)
         {
-            var character = LoadCharacter(characterName);
+            var character = LoadWorld(characterName);
             if (character != null)
             {
                 return character.Created;
@@ -31,15 +31,15 @@ namespace NullQuestOnline.Data
             return false;
         }
 
-        public void SaveCharacter(Character character)
+        public void SaveCharacter(GameWorld gameWorld)
         {
-            if (!string.IsNullOrWhiteSpace(character.Name))
+            if (!string.IsNullOrWhiteSpace(gameWorld.Character.Name))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(saveFolder));
-                var saveFile = Path.Combine(saveFolder, string.Format("{0}.xml", character.Name));
+                var saveFile = Path.Combine(saveFolder, string.Format("{0}.xml", gameWorld.Character.Name));
                 using (var writer = new StreamWriter(saveFile, false, Encoding.UTF8))
                 {
-                    Serializer.Serialize(writer, character);
+                    Serializer.Serialize(writer, gameWorld);
                 }
             }
             else
@@ -48,7 +48,7 @@ namespace NullQuestOnline.Data
             }
         }
 
-        public Character LoadCharacter(string characterName)
+        public GameWorld LoadWorld(string characterName)
         {
             var saveFile = Path.Combine(saveFolder, string.Format("{0}.xml", characterName));
             if (File.Exists(saveFile))

@@ -41,16 +41,11 @@ namespace NullQuestOnline.Controllers
 
         public ActionResult Create(string characterName)
         {
-            var newCharacter = new Character
-            {
-                Name = characterName,
-                
-                CharacterPowerRoll = 9 + Dice.Roll(4, 4)
-            };
+            var newWorld = GameWorld.Create(characterName);
 
-            accountRepository.SaveCharacter(newCharacter);
+            accountRepository.SaveCharacter(newWorld);
 
-            return View(newCharacter);
+            return View(newWorld.Character);
         }
 
         [HttpPost]
@@ -59,12 +54,12 @@ namespace NullQuestOnline.Controllers
             switch (command)
             {
                 case "accept":
-                    var character = accountRepository.LoadCharacter(characterName);
-                    if (!character.Created)
+                    var world = accountRepository.LoadWorld(characterName);
+                    if (!world.Created)
                     {
-                        character.Created = true;
-                        character.CurrentHitPoints = character.MaxHitPoints;
-                        accountRepository.SaveCharacter(character);
+                        world.Created = true;
+                        world.Character.CurrentHitPoints = world.Character.MaxHitPoints;
+                        accountRepository.SaveCharacter(world);
                     }
                     FormsAuthentication.SetAuthCookie(characterName, true);
                     return RedirectToAction("Index", "Town");

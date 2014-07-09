@@ -136,14 +136,26 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TownController.cs" />
     <Compile Include="Data\AccountRepository.cs" />
+    <Compile Include="Data\DeterministicDungeonNameGenerator.cs" />
+    <Compile Include="Data\HardCodedMonsterDataRepository.cs" />
     <Compile Include="Data\IAccountRepository.cs" />
+    <Compile Include="Data\IDungeonNameGenerator.cs" />
+    <Compile Include="Data\IMonsterDataRepository.cs" />
     <Compile Include="Extensions\ModifierExtensions.cs" />
+    <Compile Include="Game\Combat\MonsterArchetype.cs" />
+    <Compile Include="Game\Combat\MonsterModifier.cs" />
     <Compile Include="Game\Dice.cs" />
+    <Compile Include="Game\Magnitude.cs" />
+    <Compile Include="Game\Monster.cs" />
+    <Compile Include="Game\Range.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\GameWorld.cs" />
+    <Compile Include="Models\Combatant.cs" />
+    <Compile Include="Models\ViewModels\DungeonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Game\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -316,6 +329,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Dungeon\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_4BoxLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,35 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Xml.Serialization;
-using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Models
 {
-    public class Character
+    public class Character : Combatant
     {
-        [XmlAttribute]
-        public string Name { get; set; }
+        public override string BareHandsAttackName
+        {
+            get { return "Attack"; }
+        }
 
-        [XmlAttribute]
-        public int Level { get; set; }
+        public void AddExperience(int experienceToAdd)
+        {
+            Experience += experienceToAdd;
+            while (Experience > ExperienceRequiredForNextLevel(Level))
+            {
+                Level++;
+            }
+        }
 
-        [XmlAttribute]
-        public int Gold { get; set; }
+        public double ProgressTowardsNextLevel()
+        {
+            int expIntoCurrentLevel = Experience - ExperienceRequiredForNextLevel(Level - 1);
+            int additionalExperienceForNextLevel = ExperienceRequiredForNextLevel(Level) - ExperienceRequiredForNextLevel(Level - 1);
+            return (double)expIntoCurrentLevel / additionalExperienceForNextLevel;
+        }
 
-        [XmlAttribute]
-        public int Experience { get; set; }
+        public static int ExperienceRequiredForNextLevel(int currentLevel)
+        {
+            if (currentLevel < 0) throw new ArgumentException("current level can't be less than 0", "currentLevel");
+            if (currentLevel == 0) return 0;
 
-        [XmlAttribute]
-        public int CharacterPowerRoll { get; set; }
+            int expSum = 0;
+            for (int i = 0; i <= currentLevel; i++)
+            {
+                expSum += (int)Math.Floor((i * 10.5) * (2 + i));
+            }
 
-        [XmlAttribute]
-        public bool Created { get; set; }
-
-        [XmlAttribute]
-        public int CurrentHitPoints { get; set; }
-
-        public int MaxHitPoints { get { return (int)Math.Round((double)(25 + (Level * (10 + CharacterPowerRoll.GetStatModifier()))), MidpointRounding.AwayFromZero); } }
+            return expSum;
+        }
     }
 }

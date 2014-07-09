@@ -1,0 +1,33 @@
+﻿@using NullQuestOnline.Helpers
+@model NullQuestOnline.Models.ViewModels.DungeonViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_4BoxLayout.cshtml";
+}
+
+@section topleft
+{
+    @Html.KeyOptions(null,
+        HtmlHelpers.KeyedOption.Create('1', "Delve Deeper", @Url.Action("GoDeeper", "Dungeon")),
+        HtmlHelpers.KeyedOption.Create('2', "Back to Town", @Url.Action("Index", "Town"))
+    )
+}
+
+@section topright
+{
+    <h4 style="text-align: center;">
+        &raquo; <span style="color: orange; font-weight: bold;">@Model.DungeonName</span> &laquo;<br />
+        <span style="font-size: 0.8em; color: white;">A level <span style="font-size: 1.2em; color: yellow; font-weight: bold;">@Model.DungeonLevel</span> dungeon</span>
+    </h4>
+}
+
+@section bottomright
+{
+    Image of a Dungeon
+}
+
+@section bottomleft
+{
+    Character stats
+}

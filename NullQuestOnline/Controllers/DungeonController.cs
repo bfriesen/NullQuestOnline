@@ -3,18 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NullQuestOnline.Data;
+using NullQuestOnline.Models.ViewModels;
 
 namespace NullQuestOnline.Controllers
 {
     public class DungeonController : Controller
     {
-        //
-        // GET: /Dungeon/
+        private readonly IAccountRepository accountRepository;
+
+        public DungeonController()
+        {
+            accountRepository = new AccountRepository();
+        }
 
         public ActionResult Index()
         {
-            return View();
+            var world = accountRepository.LoadWorld(User.Identity.Name);
+            if (!world.InDungeon)
+            {
+                world.InDungeon = true;
+                accountRepository.SaveCharacter(world);
+            }
+            return View(new DungeonViewModel()
+            {
+                GameWorld = world,
+                DungeonName = world.GetCurrentDungeonName(),
+                DungeonLevel = world.CurrentDungeonLevel
+            });
         }
 
+        public ActionResult GoDeeper()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

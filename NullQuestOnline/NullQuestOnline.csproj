@@ -122,6 +122,9 @@
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="XSerializer">
+      <HintPath>..\packages\XSerializer.0.1.15\lib\net40\XSerializer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -132,6 +135,10 @@
     <Compile Include="Controllers\DungeonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TownController.cs" />
+    <Compile Include="Data\AccountRepository.cs" />
+    <Compile Include="Data\IAccountRepository.cs" />
+    <Compile Include="Extensions\ModifierExtensions.cs" />
+    <Compile Include="Game\Dice.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,6 +313,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Town\Tavern.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

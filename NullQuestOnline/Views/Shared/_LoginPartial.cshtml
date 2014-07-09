@@ -8,7 +8,6 @@
             <li class="divider"></li>
             @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {
-                @Html.AntiForgeryToken()
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             }
         </ul>

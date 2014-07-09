@@ -18,8 +18,8 @@
             <legend>Log in Form</legend>
             <ol>
                 <li>
-                    @Html.LabelFor(m => m.Name, "Enter your character name: ")
-                    @Html.TextBoxFor(m => m.Name)
+                    @Html.Label("characterNameLabel", "Enter your character name: ")
+                    @Html.TextBox("characterName", "")
                 </li>
             </ol>
             <button type="submit" class="btn">Log in</button>

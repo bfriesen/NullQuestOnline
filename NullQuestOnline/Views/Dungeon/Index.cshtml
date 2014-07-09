@@ -1,4 +1,5 @@
 ﻿@using NullQuestOnline.Helpers
+@using NullQuestOnline.Models
 @model NullQuestOnline.Models.ViewModels.DungeonViewModel
 
 @{
@@ -8,10 +9,20 @@
 
 @section topleft
 {
-    @Html.KeyOptions(null,
-        HtmlHelpers.KeyedOption.Create('1', "Delve Deeper", @Url.Action("GoDeeper", "Dungeon")),
-        HtmlHelpers.KeyedOption.Create('2', "Back to Town", @Url.Action("Index", "Town"))
-    )
+    @if (Model.Monster != null)
+    {
+        @Html.KeyOptions(null,
+            HtmlHelpers.KeyedOption.Create('1', "Attack", @Url.Action("Attack", "Dungeon")),
+            HtmlHelpers.KeyedOption.Create('2', "Flee", @Url.Action("Flee", "Dungeon"))
+        )
+    }
+    else
+    {
+        @Html.KeyOptions(null,
+            HtmlHelpers.KeyedOption.Create('1', "Delve Deeper", @Url.Action("GoDeeper", "Dungeon")),
+            HtmlHelpers.KeyedOption.Create('2', "Back to Town", @Url.Action("Index", "Town"))
+        )
+    }
 }
 
 @section topright
@@ -21,22 +32,29 @@
         <span style="font-size: 0.8em; color: white;">A level <span style="font-size: 1.2em; color: yellow; font-weight: bold;">@Model.DungeonLevel</span> dungeon</span>
     </h4>
 
-    @if (Model.Monster == null)
-    {
-        @Model.FluffText
-    }
-    else
+    @if (Model.Monster != null)
     {
         <span style="text-align: center;">
             <br />
             You see: <span style="font-size: 1.4em; font-weight: bold; color: white;">@Model.Monster.Name</span> (<span style="color: @Html.ColorPercentage((double)Model.Monster.CurrentHitPoints / Model.Monster.MaxHitPoints, "#FF0000", "#00FF00")">@Model.Monster.GetDescription()</span>)
         </span>
     }
+    else
+    {
+        @Model.FluffText
+    }
 }
 
 @section bottomright
 {
-    Image of a Dungeon
+    @if (Model.Monster != null)
+    {
+        <text>Combat Log</text>
+    }
+    else
+    {
+        <text>Image of a Dungeon</text>
+    }
 }
 
 @section bottomleft

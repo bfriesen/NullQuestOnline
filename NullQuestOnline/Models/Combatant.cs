@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
+using NullQuest.Game.Combat;
 using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Models
@@ -41,6 +44,15 @@ namespace NullQuestOnline.Models
             get { return CurrentHitPoints > 0; }
         }
 
+        protected readonly IList<Weapon> _inventory = new List<Weapon>();
+        public IEnumerable<Weapon> Inventory { get { return _inventory; } }
+
+        private Weapon _weapon;
+        public Weapon Weapon
+        {
+            get { return _weapon ?? Weapon.BareHands; }
+            set { _weapon = value; }
+        }
         public abstract string BareHandsAttackName { get; }
 
         public bool HasFledCombat { get; set; }
@@ -64,6 +76,48 @@ namespace NullQuestOnline.Models
             if (hpPercent < 0.90)
                 return "barely scratched";
             return "healthy";
+        }
+
+        public void ClearInventory()
+        {
+            _inventory.Clear();
+        }
+
+        public void AddItemToInventory(Weapon item)
+        {
+            var existingItem = _inventory.SingleOrDefault(x => x.Equals(item));
+            if (existingItem != null)
+            {
+                existingItem.Quantity += item.Quantity;
+            }
+            else
+            {
+                if (item.Quantity == 0)
+                {
+                    item.Quantity = 1;
+                }
+
+                _inventory.Add(item);
+            }
+        }
+
+        public void RemoveItemFromInventory(Weapon item)
+        {
+            var existingItem = _inventory.SingleOrDefault(x => x.Equals(item));
+            if (existingItem != null)
+            {
+                existingItem.Quantity--;
+                if (existingItem.Quantity == 0)
+                {
+                    _inventory.Remove(existingItem);
+                }
+            }
+        }
+
+        public void MoveItemToTopOfInventory(Weapon item, int currentIndex)
+        {
+            _inventory.RemoveAt(currentIndex);
+            _inventory.Insert(0, item);
         }
     }
 }

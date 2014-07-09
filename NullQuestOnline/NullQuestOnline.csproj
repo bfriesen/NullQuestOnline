@@ -138,13 +138,23 @@
     <Compile Include="Data\AccountRepository.cs" />
     <Compile Include="Data\DeterministicDungeonNameGenerator.cs" />
     <Compile Include="Data\HardCodedMonsterDataRepository.cs" />
+    <Compile Include="Data\HardCodedWeaponDataRepository.cs" />
     <Compile Include="Data\IAccountRepository.cs" />
     <Compile Include="Data\IDungeonNameGenerator.cs" />
     <Compile Include="Data\IMonsterDataRepository.cs" />
+    <Compile Include="Data\IWeaponDataRepository.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Extensions\MathExtensions.cs" />
     <Compile Include="Extensions\ModifierExtensions.cs" />
+    <Compile Include="Extensions\NameExtensions.cs" />
     <Compile Include="Game\Combat\MonsterArchetype.cs" />
     <Compile Include="Game\Combat\MonsterModifier.cs" />
+    <Compile Include="Game\Combat\Weapon.cs" />
+    <Compile Include="Game\Combat\WeaponArchetype.cs" />
+    <Compile Include="Game\Combat\WeaponType.cs" />
     <Compile Include="Game\Dice.cs" />
+    <Compile Include="Game\Factories\MonsterFactory.cs" />
+    <Compile Include="Game\Factories\WeaponFactory.cs" />
     <Compile Include="Game\Magnitude.cs" />
     <Compile Include="Game\Monster.cs" />
     <Compile Include="Game\Range.cs" />
@@ -299,7 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Game\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

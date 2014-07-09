@@ -44,6 +44,7 @@ namespace NullQuestOnline.Models
         public List<string> BossesDefeated { get; set; }
 
         public Monster CurrentEncounter { get; set; }
+        public List<string> CombatLog { get; set; }
 
         public void SetRequiredNumberOfMonstersInCurrentDungeonLevelBeforeBoss()
         {

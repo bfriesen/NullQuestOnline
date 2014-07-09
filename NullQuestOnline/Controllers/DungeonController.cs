@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NullQuestOnline.Data;
 using NullQuestOnline.Game;
+using NullQuestOnline.Game.Factories;
 using NullQuestOnline.Models.ViewModels;
 
 namespace NullQuestOnline.Controllers
@@ -12,10 +13,12 @@ namespace NullQuestOnline.Controllers
     public class DungeonController : Controller
     {
         private readonly IAccountRepository accountRepository;
+        private readonly MonsterFactory monsterFactory;
 
         public DungeonController()
         {
             accountRepository = new AccountRepository();
+            monsterFactory = new MonsterFactory();
         }
 
         public ActionResult Index()
@@ -24,24 +27,36 @@ namespace NullQuestOnline.Controllers
             if (!world.InDungeon)
             {
                 world.InDungeon = true;
+                world.SetRequiredNumberOfMonstersInCurrentDungeonLevelBeforeBoss();
                 accountRepository.SaveCharacter(world);
             }
 
-            var m = new Monster() {Name = "Baddie"};
-            m.CurrentHitPoints = Dice.Random(0, m.MaxHitPoints);
-            return View(new DungeonViewModel()
-            {
-                GameWorld = world,
-                DungeonName = world.GetCurrentDungeonName(),
-                DungeonLevel = world.CurrentDungeonLevel,
-                FluffText = "This is the dungeon - it isn't a very friendly place. Hallways go off in seemingly every direction, with no end in sight. A skeleton sits upright against a wall in the corner. No doubt an adventurer that came before you...",
-                Monster = m // world.CurrentEncounter
-            });
+            return View(DungeonViewModel.Create(world));
         }
 
         public ActionResult GoDeeper()
         {
-            throw new NotImplementedException();
+            var world = accountRepository.LoadWorld(User.Identity.Name);
+            if (world.InDungeon)
+            {
+                if (world.CurrentEncounter == null)
+                {
+                    world.CurrentEncounter = monsterFactory.CreateMonster(world);
+                    accountRepository.SaveCharacter(world);
+                }
+                return View("Index", DungeonViewModel.Create(world));
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Attack()
+        {
+            return null;
+        }
+
+        public ActionResult Flee()
+        {
+            return null;
         }
     }
 }

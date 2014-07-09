@@ -12,6 +12,11 @@ namespace NullQuestOnline.Game
             return Roll(numberOfSides).Take(numberOfDice).Sum();
         }
 
+        public static int Roll(Magnitude magnitude)
+        {
+            return magnitude.BaseAmount + Roll(magnitude.NumberOfDice, magnitude.NumberOfSides);
+        }
+
         private static IEnumerable<int> Roll(int numberOfSides)
         {
             while (true)

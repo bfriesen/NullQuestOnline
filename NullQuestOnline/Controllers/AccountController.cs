@@ -75,7 +75,7 @@ namespace NullQuestOnline.Controllers
             return RedirectToAction("Create", new { characterName });
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Logout()
         {
             authHelper.SignOut();

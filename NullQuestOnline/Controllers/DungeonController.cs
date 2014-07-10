@@ -12,6 +12,7 @@ using NullQuestOnline.Models;
 
 namespace NullQuestOnline.Controllers
 {
+    [Authorize]
     public class DungeonController : Controller
     {
         private readonly IAccountRepository accountRepository;
@@ -79,14 +80,14 @@ namespace NullQuestOnline.Controllers
 
                         if (!world.Character.IsAlive)
                         {
-                            world.CombatLog.Add(string.Format("Dude, the {0} totally killed you! Bummer.",
+                            world.CombatLog.Add(string.Format("Dude, the ^C{0}^N totally killed you! Bummer.",
                                 world.CurrentEncounter.Name));
                         }
 
                         if (!world.CurrentEncounter.IsAlive)
                         {
                             world.CombatLog.Add(string.Format(
-                                "Dude, you totally killed that {0}! Awesome.{1}You received {2} XP and {3} gold.",
+                                "Dude, you totally killed that ^C{0}^N! Awesome.^W{1}^NYou received ^W{2}^N XP and ^W{3}^N gold.",
                                 world.CurrentEncounter.Name,
                                 "<br />",
                                 world.CurrentEncounter.Experience,
@@ -98,7 +99,7 @@ namespace NullQuestOnline.Controllers
                             if (world.CurrentEncounter.Weapon != null &&
                                 !world.CurrentEncounter.Weapon.Equals(Weapon.BareHands))
                             {
-                                world.CombatLog.Add(string.Format("&nbsp;-&nbsp;{0} dropped {1}",
+                                world.CombatLog.Add(string.Format("&nbsp;-&nbsp;^C{0}^N dropped ^V{1}^N",
                                     world.CurrentEncounter.Name, world.CurrentEncounter.Weapon.Name));
                                 world.Character.AddItemToInventory(world.CurrentEncounter.Weapon);
                                 world.CurrentEncounter.Weapon = null;

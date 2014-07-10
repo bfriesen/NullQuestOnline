@@ -67,7 +67,7 @@
         {
             foreach (var log in (Model.CombatLog as IEnumerable<string>).Reverse().Take(21))
             {
-                <text>@(new MvcHtmlString(log))<br /></text>
+                <text>@(log.Colorize())<br /></text>
             }
         }
         else

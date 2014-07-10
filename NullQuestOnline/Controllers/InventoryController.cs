@@ -10,6 +10,7 @@ using NullQuestOnline.Models;
 
 namespace NullQuestOnline.Controllers
 {
+    [Authorize]
     public class InventoryController : Controller
     {
         private readonly IAccountRepository accountRepository;

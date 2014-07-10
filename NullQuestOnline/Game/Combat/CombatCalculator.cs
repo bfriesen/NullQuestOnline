@@ -20,11 +20,11 @@ namespace NullQuestOnline.Game.Combat
             {
                 var damage = Math.Max(1, attacker.GetAttackDamage());
                 defender.LowerHealth(damage);
-                combatLog.Add(string.Format("{0} hits {1} with {2} for {3} points!", attacker.Name, defender.Name, attacker.Weapon.Name, damage));
+                combatLog.Add(string.Format("^C{0}^N hits ^C{1}^N with ^R{2}^N for ^W{3}^N points!", attacker.Name, defender.Name, attacker.Weapon.Name, damage));
             }
             else
             {
-                combatLog.Add(string.Format("{0} attempts to hit {1} with {2} and fails miserably!", attacker.Name, defender.Name, attacker.Weapon.Name));
+                combatLog.Add(string.Format("^C{0}^N attempts to hit ^C{1}^N with ^R{2}^N and ^Wfails miserably^N!", attacker.Name, defender.Name, attacker.Weapon.Name));
             }
         }
 
@@ -39,11 +39,11 @@ namespace NullQuestOnline.Game.Combat
             if (Dice.Random() < toFleeThreshold)
             {
                 attacker.HasFledCombat = true;
-                combatLog.Add(string.Format("{0} has fled the battle!", attacker.Name));
+                combatLog.Add(string.Format("^C{0}^N has fled the battle!", attacker.Name));
             }
             else
             {
-                combatLog.Add(string.Format("{0} attempts to flee but {1} gets in the way!", attacker.Name, defender.Name));
+                combatLog.Add(string.Format("^C{0}^N attempts to flee but ^C{1}^N gets in the way!", attacker.Name, defender.Name));
             }
         }
     }

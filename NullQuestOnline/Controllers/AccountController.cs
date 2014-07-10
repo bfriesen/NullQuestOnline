@@ -37,7 +37,7 @@ namespace NullQuestOnline.Controllers
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Create", new { characterName, returnUrl });
+            return RedirectToAction("Create", new { characterName });
         }
 
         public ActionResult Create(string characterName)
@@ -50,7 +50,7 @@ namespace NullQuestOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string command, string characterName, string returnUrl)
+        public ActionResult Create(string command, string characterName)
         {
             switch (command)
             {
@@ -69,9 +69,9 @@ namespace NullQuestOnline.Controllers
 
                     return RedirectToAction("Index", "Town");
                 case "reroll":
-                    return RedirectToAction("Create", new { characterName, returnUrl });
+                    return RedirectToAction("Create", new { characterName });
             }
-            return RedirectToAction("Create", new { characterName, returnUrl });
+            return RedirectToAction("Create", new { characterName });
         }
 
         public ActionResult Logout()

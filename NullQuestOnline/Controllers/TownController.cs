@@ -28,7 +28,7 @@ namespace NullQuestOnline.Controllers
                 world.CurrentEncounter = null;
             }
             world.NumberOfMonstersDefeatedInCurrentDungeonLevel = 0;
-            accountRepository.SaveCharacter(world);
+            accountRepository.SaveWorld(world);
 
             return View();
         }
@@ -39,7 +39,7 @@ namespace NullQuestOnline.Controllers
             world.NumberOfMonstersDefeatedInCurrentDungeonLevel = 0;
             world.SavedCharacter = world.Character.DeepClone();
             world.Character.RestoreHealth(world.Character.MaxHitPoints);
-            accountRepository.SaveCharacter(world);
+            accountRepository.SaveWorld(world);
 
             return View();
         }

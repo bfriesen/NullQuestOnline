@@ -43,7 +43,7 @@ namespace NullQuestOnline.Controllers
         {
             var newWorld = GameWorld.Create(characterName);
 
-            accountRepository.SaveCharacter(newWorld);
+            accountRepository.SaveWorld(newWorld);
 
             return View(newWorld.Character);
         }
@@ -60,7 +60,7 @@ namespace NullQuestOnline.Controllers
                         world.Created = true;
                         world.Character.CurrentHitPoints = world.Character.MaxHitPoints;
                         world.SavedCharacter = world.Character.DeepClone();
-                        accountRepository.SaveCharacter(world);
+                        accountRepository.SaveWorld(world);
                     }
                     FormsAuthentication.SetAuthCookie(characterName, true);
                     return RedirectToAction("Index", "Town");

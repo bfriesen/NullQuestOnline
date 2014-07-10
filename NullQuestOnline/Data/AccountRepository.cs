@@ -31,7 +31,7 @@ namespace NullQuestOnline.Data
             return false;
         }
 
-        public void SaveCharacter(GameWorld gameWorld)
+        public void SaveWorld(GameWorld gameWorld)
         {
             if (!string.IsNullOrWhiteSpace(gameWorld.Character.Name))
             {

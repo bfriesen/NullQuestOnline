@@ -1,19 +1,20 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
+﻿using System.Web.Mvc;
 using NullQuestOnline.Data;
 using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
+using NullQuestOnline.Helpers;
 
 namespace NullQuestOnline.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IAccountRepository accountRepository;
+        private readonly IAuthHelper authHelper;
 
         public AccountController()
         {
             accountRepository = new AccountRepository();
+            authHelper = new AuthHelper();
         }
 
         public ActionResult Login()
@@ -26,7 +27,7 @@ namespace NullQuestOnline.Controllers
         {
             if (accountRepository.IsCharacterCreated(characterName))
             {
-                FormsAuthentication.SetAuthCookie(characterName, true);
+                authHelper.SignIn(characterName);
 
                 if (returnUrl == null)
                 {
@@ -41,7 +42,7 @@ namespace NullQuestOnline.Controllers
 
         public ActionResult Create(string characterName)
         {
-            var newWorld = GameWorld.Create(characterName);
+            GameWorld newWorld = GameWorld.Create(characterName);
 
             accountRepository.SaveWorld(newWorld);
 
@@ -54,7 +55,8 @@ namespace NullQuestOnline.Controllers
             switch (command)
             {
                 case "accept":
-                    var world = accountRepository.LoadWorld(characterName);
+                    GameWorld world = accountRepository.LoadWorld(characterName);
+
                     if (!world.Created)
                     {
                         world.Created = true;
@@ -62,7 +64,9 @@ namespace NullQuestOnline.Controllers
                         world.SavedCharacter = world.Character.DeepClone();
                         accountRepository.SaveWorld(world);
                     }
-                    FormsAuthentication.SetAuthCookie(characterName, true);
+
+                    authHelper.SignIn(characterName);
+
                     return RedirectToAction("Index", "Town");
                 case "reroll":
                     return RedirectToAction("Create", new { characterName, returnUrl });
@@ -72,7 +76,7 @@ namespace NullQuestOnline.Controllers
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            authHelper.SignOut();
             return RedirectToAction("Index", "Home");
         }
     }

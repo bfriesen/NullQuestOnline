@@ -8,8 +8,8 @@ namespace NullQuestOnline.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IAccountRepository accountRepository;
-        private readonly IAuthHelper authHelper;
+        private readonly AccountRepository accountRepository;
+        private readonly AuthHelper authHelper;
 
         public AccountController()
         {

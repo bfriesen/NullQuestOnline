@@ -6,7 +6,7 @@ using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Game.Combat
 {
-    public class AttackCalculator
+    public class CombatCalculator
     {
         public static void Attack(Combatant attacker, Combatant defender, List<string> combatLog)
         {
@@ -25,6 +25,25 @@ namespace NullQuestOnline.Game.Combat
             else
             {
                 combatLog.Add(string.Format("{0} attempts to hit {1} with {2} and fails miserably!", attacker.Name, defender.Name, attacker.Weapon.Name));
+            }
+        }
+
+        public static void Flee(Combatant attacker, Combatant defender, List<string> combatLog)
+        {
+            int attackerFleeRating = Math.Max(1, attacker.Level + attacker.PowerRoll.GetStatModifier());
+            int defenderFleeRating = Math.Max(1, defender.Level + defender.PowerRoll.GetStatModifier());
+
+            var toFleeThreshold = ((attackerFleeRating) / ((double)attackerFleeRating + defenderFleeRating)).ConstrainWithinBounds(0.20, 0.80);
+            Debug.WriteLine("{0} has a {1:P0} chance to flee from {2}", attacker.Name, toFleeThreshold, defender.Name);
+
+            if (Dice.Random() < toFleeThreshold)
+            {
+                attacker.HasFledCombat = true;
+                combatLog.Add(string.Format("{0} has fled the battle!", attacker.Name));
+            }
+            else
+            {
+                combatLog.Add(string.Format("{0} attempts to flee but {1} gets in the way!", attacker.Name, defender.Name));
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace NullQuestOnline.Game
 {
+    [Serializable]
     public class Character : Combatant
     {
         public override string BareHandsAttackName

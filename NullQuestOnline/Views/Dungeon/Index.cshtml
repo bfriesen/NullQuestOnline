@@ -16,7 +16,7 @@
     }
     else if (Model.Monster != null)
     {
-        if (Model.MonsterDead)
+        if (Model.MonsterDead || Model.PlayerFled)
         {
             @Html.KeyOptions(null,
                 HtmlHelpers.KeyedOption.Create('3', "Continue", @Url.Action("Index", "Dungeon"))
@@ -34,7 +34,8 @@
     {
         @Html.KeyOptions(null,
             HtmlHelpers.KeyedOption.Create('1', "Delve Deeper", @Url.Action("GoDeeper", "Dungeon")),
-            HtmlHelpers.KeyedOption.Create('2', "Back to Town", @Url.Action("Index", "Town"))
+            HtmlHelpers.KeyedOption.Create('2', "Back to Town", @Url.Action("Index", "Town")),
+            HtmlHelpers.KeyedOption.Create('4', "Inventory", @Url.Action("Index", "Inventory"))
         )
     }
 }

@@ -56,7 +56,7 @@ namespace NullQuestOnline.Game.Factories
             monster.CurrentHitPoints = monster.MaxHitPoints;
 
             var bossMultiplier = monster.IsBoss ? 6 : 1;
-            monster.PowerRoll = monster.IsBoss ? 17 + Dice.Roll(2, 4) : 12 + Dice.Roll(1, 6);
+            monster.PowerRoll = monster.IsBoss ? 12 + Dice.Roll(2, 4) : 12 + Dice.Roll(1, 6);
             monster.CurrentHitPoints = monster.MaxHitPoints;
             monster.Gold = monster.Level * Dice.Roll(3 * bossMultiplier, 10);
             monster.Experience = (monster.Level * Dice.Roll(2 * bossMultiplier, 8));

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NullQuestOnline.Data;
+using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Controllers
 {
@@ -22,6 +23,7 @@ namespace NullQuestOnline.Controllers
             var world = accountRepository.LoadWorld(User.Identity.Name);
             if (!world.Character.IsAlive)
             {
+                world.Character = world.SavedCharacter.DeepClone();
                 world.Character.RestoreHealth(world.Character.MaxHitPoints);
                 world.CurrentEncounter = null;
             }
@@ -34,8 +36,9 @@ namespace NullQuestOnline.Controllers
         public ActionResult Tavern()
         {
             var world = accountRepository.LoadWorld(User.Identity.Name);
-            world.Character.RestoreHealth(world.Character.MaxHitPoints);
             world.NumberOfMonstersDefeatedInCurrentDungeonLevel = 0;
+            world.SavedCharacter = world.Character.DeepClone();
+            world.Character.RestoreHealth(world.Character.MaxHitPoints);
             accountRepository.SaveCharacter(world);
 
             return View();

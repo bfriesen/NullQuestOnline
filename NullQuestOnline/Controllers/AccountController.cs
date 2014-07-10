@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using NullQuestOnline.Data;
+using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
 
 namespace NullQuestOnline.Controllers
@@ -58,6 +59,7 @@ namespace NullQuestOnline.Controllers
                     {
                         world.Created = true;
                         world.Character.CurrentHitPoints = world.Character.MaxHitPoints;
+                        world.SavedCharacter = world.Character.DeepClone();
                         accountRepository.SaveCharacter(world);
                     }
                     FormsAuthentication.SetAuthCookie(characterName, true);

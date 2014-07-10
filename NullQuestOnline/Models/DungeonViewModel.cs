@@ -34,7 +34,8 @@ namespace NullQuestOnline.Models
                 CurrentWeapon = gameWorld.Character.Weapon.GetLeveledName(),
                 ItemsInInventory = gameWorld.Character.Inventory.Count(),
                 PlayerDead = !gameWorld.Character.IsAlive,
-                MonsterDead = gameWorld.CurrentEncounter != null && !gameWorld.CurrentEncounter.IsAlive
+                MonsterDead = gameWorld.CurrentEncounter != null && !gameWorld.CurrentEncounter.IsAlive,
+                PlayerFled = gameWorld.Character.HasFledCombat
             };
         }
 
@@ -53,6 +54,7 @@ namespace NullQuestOnline.Models
         public int ItemsInInventory { get; set; }
         public bool PlayerDead { get; set; }
         public bool MonsterDead { get; set; }
+        public bool PlayerFled { get; set; }
 
         private static string GetMeter(double current, double max)
         {

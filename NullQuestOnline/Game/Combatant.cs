@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 using NullQuest.Game.Combat;
+using NullQuestOnline.Controllers;
 using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Game
 {
+    [Serializable]
     public abstract class Combatant
     {
+        protected Combatant()
+        {
+            Inventory = new List<Weapon>();
+        }
+
         [XmlAttribute]
         public string Name { get; set; }
 
@@ -44,8 +51,8 @@ namespace NullQuestOnline.Game
             get { return CurrentHitPoints > 0; }
         }
 
-        protected readonly IList<Weapon> _inventory = new List<Weapon>();
-        public IEnumerable<Weapon> Inventory { get { return _inventory; } }
+        [XmlArrayItem("Item")]
+        public List<Weapon> Inventory { get; set; }
 
         private Weapon _weapon;
         public Weapon Weapon
@@ -85,12 +92,12 @@ namespace NullQuestOnline.Game
 
         public void ClearInventory()
         {
-            _inventory.Clear();
+            Inventory.Clear();
         }
 
         public void AddItemToInventory(Weapon item)
         {
-            var existingItem = _inventory.SingleOrDefault(x => x.Equals(item));
+            var existingItem = Inventory.SingleOrDefault(x => x.Equals(item));
             if (existingItem != null)
             {
                 existingItem.Quantity += item.Quantity;
@@ -102,27 +109,27 @@ namespace NullQuestOnline.Game
                     item.Quantity = 1;
                 }
 
-                _inventory.Add(item);
+                Inventory.Add(item);
             }
         }
 
         public void RemoveItemFromInventory(Weapon item)
         {
-            var existingItem = _inventory.SingleOrDefault(x => x.Equals(item));
+            var existingItem = Inventory.SingleOrDefault(x => x.Equals(item));
             if (existingItem != null)
             {
                 existingItem.Quantity--;
                 if (existingItem.Quantity == 0)
                 {
-                    _inventory.Remove(existingItem);
+                    Inventory.Remove(existingItem);
                 }
             }
         }
 
         public void MoveItemToTopOfInventory(Weapon item, int currentIndex)
         {
-            _inventory.RemoveAt(currentIndex);
-            _inventory.Insert(0, item);
+            Inventory.RemoveAt(currentIndex);
+            Inventory.Insert(0, item);
         }
     }
 }

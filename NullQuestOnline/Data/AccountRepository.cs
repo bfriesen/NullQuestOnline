@@ -11,7 +11,7 @@ namespace NullQuestOnline.Data
         private static readonly XmlSerializer<GameWorld> Serializer;
         static AccountRepository()
         {
-            Serializer = new XmlSerializer<GameWorld>(options => options.SetRootElementName("Character").Indent());
+            Serializer = new XmlSerializer<GameWorld>(options => options.SetRootElementName("World").Indent());
         }
 
         private readonly string saveFolder;

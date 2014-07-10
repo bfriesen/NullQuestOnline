@@ -29,6 +29,7 @@ namespace NullQuestOnline.Game
         }
 
         public Character Character { get; set; }
+        public Character SavedCharacter { get; set; }
         [XmlAttribute] public bool Created { get; set; }
         public bool InDungeon { get; set; }
         public int CurrentDungeonLevel { get; set; }

@@ -1,0 +1,32 @@
+﻿@using NullQuestOnline.Extensions
+@using NullQuestOnline.Helpers
+@model NullQuestOnline.Models.InventoryViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_2ColLayout.cshtml";
+}
+
+@section left
+{
+    @Html.KeyOptions(null,
+        HtmlHelpers.KeyedOption.Create('1', "Back to Dungeon", @Url.Action("Index", "Dungeon"))
+    )
+}
+
+@section right
+{
+    Currently Equipped: @Model.CurrentlyEquippedWeapon.GetLeveledName() (@Model.CurrentlyEquippedWeapon.Damage)
+    @using (Html.BeginForm("Change", "Inventory"))
+    {
+        foreach (var weapon in Model.Weapons)
+        {
+            <div>
+                <text>(@(weapon.Quantity)x) @weapon.GetLeveledName() (@weapon.Damage)</text>
+                <button type="submit" name="equip" value="@weapon.Id" class="btn">Equip</button>
+                <button type="submit" name="destroy" value="@weapon.Id" class="btn">Destroy</button>
+            </div>
+        }
+    }
+}
+

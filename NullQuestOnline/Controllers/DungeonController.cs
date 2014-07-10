@@ -33,9 +33,10 @@ namespace NullQuestOnline.Controllers
                 world.CombatLog = new List<string>();
                 accountRepository.SaveCharacter(world);
             }
-            if (world.InDungeon && world.CurrentEncounter != null && !world.CurrentEncounter.IsAlive)
+            if (world.InDungeon && world.CurrentEncounter != null && (!world.CurrentEncounter.IsAlive || world.Character.HasFledCombat))
             {
                 world.CurrentEncounter = null;
+                world.Character.HasFledCombat = false;
                 world.CombatLog = new List<string>();
                 accountRepository.SaveCharacter(world);
             }
@@ -68,17 +69,18 @@ namespace NullQuestOnline.Controllers
                 {
                     if (world.CurrentEncounter.IsAlive && world.Character.IsAlive)
                     {
-                        AttackCalculator.Attack(world.Character, world.CurrentEncounter, world.CombatLog);
+                        CombatCalculator.Attack(world.Character, world.CurrentEncounter, world.CombatLog);
                         if (world.CurrentEncounter.IsAlive)
                         {
-                            AttackCalculator.Attack(world.CurrentEncounter, world.Character, world.CombatLog);
+                            CombatCalculator.Attack(world.CurrentEncounter, world.Character, world.CombatLog);
                         }
 
                         world.CombatLog.Add("");
 
                         if (!world.Character.IsAlive)
                         {
-                            world.CombatLog.Add(string.Format("Dude, the {0} totally killed you! Bummer.", world.CurrentEncounter.Name));
+                            world.CombatLog.Add(string.Format("Dude, the {0} totally killed you! Bummer.",
+                                world.CurrentEncounter.Name));
                         }
 
                         if (!world.CurrentEncounter.IsAlive)
@@ -123,7 +125,33 @@ namespace NullQuestOnline.Controllers
 
         public ActionResult Flee()
         {
-            return null;
+            var world = accountRepository.LoadWorld(User.Identity.Name);
+            if (world.InDungeon)
+            {
+                if (world.CurrentEncounter != null)
+                {
+                    if (world.CurrentEncounter.IsAlive && world.Character.IsAlive)
+                    {
+                        CombatCalculator.Flee(world.Character, world.CurrentEncounter, world.CombatLog);
+                        if (!world.Character.HasFledCombat)
+                        {
+                            CombatCalculator.Attack(world.CurrentEncounter, world.Character, world.CombatLog);
+                        }
+
+                        world.CombatLog.Add("");
+
+                        if (!world.Character.IsAlive)
+                        {
+                            world.CombatLog.Add(string.Format("Dude, the {0} totally killed you! Bummer.",
+                                world.CurrentEncounter.Name));
+                        }
+
+                        accountRepository.SaveCharacter(world);
+                        return View("Index", DungeonViewModel.Create(world));
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

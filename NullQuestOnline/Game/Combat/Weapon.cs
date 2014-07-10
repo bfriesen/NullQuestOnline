@@ -10,6 +10,13 @@ namespace NullQuest.Game.Combat
     [Serializable]
     public class Weapon
     {
+        public Guid Id { get; set; }
+
+        public Weapon()
+        {
+            Id = Guid.NewGuid();
+        }
+
         public static readonly Weapon BareHands =
             new Weapon
             {
@@ -23,10 +30,6 @@ namespace NullQuest.Game.Combat
                         NumberOfSides = 4
                     }
             };
-
-        public Weapon()
-        {
-        }
 
         public Weapon(WeaponArchetype weaponArchetype)
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NullQuest.Game.Combat;
 using NullQuestOnline.Data;
@@ -57,7 +58,7 @@ namespace NullQuestOnline.Game.Factories
                 randomMultiplier = Dice.Random(minMultiplier, maxMultiplier);
             }
 
-            var newWeapon = new Weapon(weaponArchetype) { Level = randomMultiplier - 1, Quantity = 1 };
+            var newWeapon = new Weapon(weaponArchetype) { Level = randomMultiplier - 1, Quantity = 1, Id = Guid.NewGuid() };
             return newWeapon;
         }
     }

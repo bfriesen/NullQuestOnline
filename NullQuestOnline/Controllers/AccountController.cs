@@ -16,6 +16,7 @@ namespace NullQuestOnline.Controllers
             authHelper = new AuthHelper();
         }
 
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -39,6 +40,7 @@ namespace NullQuestOnline.Controllers
             return RedirectToAction("Create", new { characterName });
         }
 
+        [HttpGet]
         public ActionResult Create(string characterName)
         {
             GameWorld newWorld = GameWorld.Create(characterName);
@@ -73,6 +75,7 @@ namespace NullQuestOnline.Controllers
             return RedirectToAction("Create", new { characterName });
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             authHelper.SignOut();

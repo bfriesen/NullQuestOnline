@@ -26,12 +26,12 @@ namespace NullQuestOnline.Data
             var character = LoadWorld(characterName);
             if (character != null)
             {
-                return character.Created;
+                return character.IsAccepted;
             }
             return false;
         }
 
-        public void SaveCharacter(GameWorld gameWorld)
+        public void SaveWorld(GameWorld gameWorld)
         {
             if (!string.IsNullOrWhiteSpace(gameWorld.Character.Name))
             {

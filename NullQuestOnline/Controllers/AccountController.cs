@@ -1,21 +1,22 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
+﻿using System.Web.Mvc;
 using NullQuestOnline.Data;
-using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
+using NullQuestOnline.Helpers;
 
 namespace NullQuestOnline.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IAccountRepository accountRepository;
+        private readonly AccountRepository accountRepository;
+        private readonly AuthHelper authHelper;
 
         public AccountController()
         {
             accountRepository = new AccountRepository();
+            authHelper = new AuthHelper();
         }
 
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -26,7 +27,7 @@ namespace NullQuestOnline.Controllers
         {
             if (accountRepository.IsCharacterCreated(characterName))
             {
-                FormsAuthentication.SetAuthCookie(characterName, true);
+                authHelper.SignIn(characterName);
 
                 if (returnUrl == null)
                 {
@@ -36,43 +37,48 @@ namespace NullQuestOnline.Controllers
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Create", new { characterName, returnUrl });
+            return RedirectToAction("Create", new { characterName });
         }
 
+        [HttpGet]
         public ActionResult Create(string characterName)
         {
-            var newWorld = GameWorld.Create(characterName);
+            GameWorld newWorld = GameWorld.Create(characterName);
 
-            accountRepository.SaveCharacter(newWorld);
+            accountRepository.SaveWorld(newWorld);
 
             return View(newWorld.Character);
         }
 
         [HttpPost]
-        public ActionResult Create(string command, string characterName, string returnUrl)
+        public ActionResult Create(string command, string characterName)
         {
             switch (command)
             {
                 case "accept":
-                    var world = accountRepository.LoadWorld(characterName);
-                    if (!world.Created)
+                    GameWorld world = accountRepository.LoadWorld(characterName);
+
+                    if (!world.IsAccepted)
                     {
-                        world.Created = true;
-                        world.Character.CurrentHitPoints = world.Character.MaxHitPoints;
-                        world.SavedCharacter = world.Character.DeepClone();
-                        accountRepository.SaveCharacter(world);
+                        world.Accept();
+                        accountRepository.SaveWorld(world);
                     }
-                    FormsAuthentication.SetAuthCookie(characterName, true);
+
+                    authHelper.SignIn(characterName);
+
                     return RedirectToAction("Index", "Town");
+
                 case "reroll":
-                    return RedirectToAction("Create", new { characterName, returnUrl });
+                    return RedirectToAction("Create", new { characterName });
             }
-            return RedirectToAction("Create", new { characterName, returnUrl });
+
+            return RedirectToAction("Create", new { characterName });
         }
 
+        [HttpPost]
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            authHelper.SignOut();
             return RedirectToAction("Index", "Home");
         }
     }

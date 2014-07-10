@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 using NullQuestOnline.Data;
+using NullQuestOnline.Extensions;
 
 namespace NullQuestOnline.Game
 {
@@ -11,7 +12,6 @@ namespace NullQuestOnline.Game
         public GameWorld()
         {
             dungeonNameGenerator = new DeterministicDungeonNameGenerator();
-            
         }
 
         public static GameWorld Create(string characterName)
@@ -28,9 +28,16 @@ namespace NullQuestOnline.Game
             };
         }
 
+        public void Accept()
+        {
+            IsAccepted = true;
+            Character.CurrentHitPoints = Character.MaxHitPoints;
+            SavedCharacter = Character.DeepClone();
+        }
+
         public Character Character { get; set; }
         public Character SavedCharacter { get; set; }
-        [XmlAttribute] public bool Created { get; set; }
+        [XmlAttribute("Created")] public bool IsAccepted { get; set; }
         public bool InDungeon { get; set; }
         public int CurrentDungeonLevel { get; set; }
         public int NumberOfMonstersDefeatedInCurrentDungeonLevel { get; set; }

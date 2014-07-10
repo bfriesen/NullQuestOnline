@@ -167,7 +167,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ColorHelpers.cs" />
+    <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
+    <Compile Include="Helpers\IAuthHelper.cs" />
     <Compile Include="Models\DungeonViewModel.cs" />
     <Compile Include="Models\InventoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

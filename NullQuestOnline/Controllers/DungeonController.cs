@@ -32,14 +32,14 @@ namespace NullQuestOnline.Controllers
                 world.InDungeon = true;
                 world.SetRequiredNumberOfMonstersInCurrentDungeonLevelBeforeBoss();
                 world.CombatLog = new List<string>();
-                accountRepository.SaveCharacter(world);
+                accountRepository.SaveWorld(world);
             }
             if (world.InDungeon && world.CurrentEncounter != null && (!world.CurrentEncounter.IsAlive || world.Character.HasFledCombat))
             {
                 world.CurrentEncounter = null;
                 world.Character.HasFledCombat = false;
                 world.CombatLog = new List<string>();
-                accountRepository.SaveCharacter(world);
+                accountRepository.SaveWorld(world);
             }
 
             return View(DungeonViewModel.Create(world));
@@ -54,7 +54,7 @@ namespace NullQuestOnline.Controllers
                 {
                     world.CurrentEncounter = monsterFactory.CreateMonster(world);
                     world.CombatLog = new List<string>();
-                    accountRepository.SaveCharacter(world);
+                    accountRepository.SaveWorld(world);
                 }
                 return View("Index", DungeonViewModel.Create(world));
             }
@@ -117,7 +117,7 @@ namespace NullQuestOnline.Controllers
                         }
                     }
 
-                    accountRepository.SaveCharacter(world);
+                    accountRepository.SaveWorld(world);
                     return View("Index", DungeonViewModel.Create(world));
                 }
             }
@@ -147,7 +147,7 @@ namespace NullQuestOnline.Controllers
                                 world.CurrentEncounter.Name));
                         }
 
-                        accountRepository.SaveCharacter(world);
+                        accountRepository.SaveWorld(world);
                         return View("Index", DungeonViewModel.Create(world));
                     }
                 }

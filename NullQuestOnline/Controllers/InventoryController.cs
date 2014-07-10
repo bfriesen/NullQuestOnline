@@ -42,14 +42,14 @@ namespace NullQuestOnline.Controllers
                 world.Character.RemoveItemFromInventory(weapon);
                 world.Character.Weapon = weapon.DeepClone();
                 world.Character.Weapon.Quantity = 1;
-                accountRepository.SaveCharacter(world);
+                accountRepository.SaveWorld(world);
             }
 
             if (destroy != null)
             {
                 var weapon = world.Character.Inventory.Single(x => x.Id == new Guid(destroy));
                 world.Character.RemoveItemFromInventory(weapon);
-                accountRepository.SaveCharacter(world);
+                accountRepository.SaveWorld(world);
             }
             return View("Index", InventoryViewModel.Create(world));
         }

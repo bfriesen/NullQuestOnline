@@ -4,7 +4,6 @@ using System.Linq;
 using System.Xml.Serialization;
 using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
-using NullQuestOnline.Models;
 
 namespace NullQuest.Game.Combat
 {

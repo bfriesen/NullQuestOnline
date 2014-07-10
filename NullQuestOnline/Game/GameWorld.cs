@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 using NullQuestOnline.Data;
-using NullQuestOnline.Extensions;
-using NullQuestOnline.Game;
 
-namespace NullQuestOnline.Models
+namespace NullQuestOnline.Game
 {
     public class GameWorld
     {

@@ -1,4 +1,4 @@
-﻿using NullQuestOnline.Models;
+﻿using NullQuestOnline.Game;
 
 namespace NullQuestOnline.Data
 {

@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using NullQuestOnline.Data;
 using NullQuestOnline.Game;
-using NullQuestOnline.Models;
 
 namespace NullQuestOnline.Controllers
 {

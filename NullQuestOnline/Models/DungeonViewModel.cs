@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NullQuestOnline.Extensions;
+using NullQuestOnline.Game;
 
-namespace NullQuestOnline.Models.ViewModels
+namespace NullQuestOnline.Models
 {
     public class DungeonViewModel
     {
@@ -11,6 +12,7 @@ namespace NullQuestOnline.Models.ViewModels
         public int DungeonLevel { get; set; }
         public string FluffText { get; set; }
         public Combatant Monster { get; set; }
+        public List<string> CombatLog { get; set; }
 
         public static DungeonViewModel Create(GameWorld gameWorld)
         {
@@ -21,6 +23,7 @@ namespace NullQuestOnline.Models.ViewModels
                 FluffText = 
                     "This is the dungeon - it isn't a very friendly place. Hallways go off in seemingly every direction, with no end in sight. A skeleton sits upright against a wall in the corner. No doubt an adventurer that came before you...",
                 Monster = gameWorld.CurrentEncounter,
+                CombatLog = gameWorld.CombatLog,
                 CharacterName = gameWorld.Character.Name,
                 Level = gameWorld.Character.Level,
                 Gold = gameWorld.Character.Gold,
@@ -29,7 +32,9 @@ namespace NullQuestOnline.Models.ViewModels
                 Experience = gameWorld.Character.Experience,
                 ExperienceMeter = gameWorld.Character.ProgressTowardsNextLevel(),
                 CurrentWeapon = gameWorld.Character.Weapon.GetLeveledName(),
-                ItemsInInventory = gameWorld.Character.Inventory.Count()
+                ItemsInInventory = gameWorld.Character.Inventory.Count(),
+                PlayerDead = !gameWorld.Character.IsAlive,
+                MonsterDead = gameWorld.CurrentEncounter != null && !gameWorld.CurrentEncounter.IsAlive
             };
         }
 
@@ -46,6 +51,8 @@ namespace NullQuestOnline.Models.ViewModels
 
         public string CurrentWeapon { get; set; }
         public int ItemsInInventory { get; set; }
+        public bool PlayerDead { get; set; }
+        public bool MonsterDead { get; set; }
 
         private static string GetMeter(double current, double max)
         {

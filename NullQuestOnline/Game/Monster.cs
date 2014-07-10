@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NullQuestOnline.Models;
 
 namespace NullQuestOnline.Game
 {

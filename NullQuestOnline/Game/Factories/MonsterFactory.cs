@@ -4,7 +4,6 @@ using System.Linq;
 using NullQuestOnline.Data;
 using NullQuestOnline.Extensions;
 using NullQuestOnline.Game.Combat;
-using NullQuestOnline.Models;
 
 namespace NullQuestOnline.Game.Factories
 {

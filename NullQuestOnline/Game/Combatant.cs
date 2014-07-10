@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using NullQuest.Game.Combat;
 using NullQuestOnline.Extensions;
 
-namespace NullQuestOnline.Models
+namespace NullQuestOnline.Game
 {
     public abstract class Combatant
     {
@@ -54,6 +54,11 @@ namespace NullQuestOnline.Models
             set { _weapon = value; }
         }
         public abstract string BareHandsAttackName { get; }
+
+        public int GetAttackDamage()
+        {
+            return PowerRoll.GetStatModifier() + (Dice.Roll(Weapon.Damage) * (Weapon.Level + 1));
+        }
 
         public bool HasFledCombat { get; set; }
         public string GetDescription()

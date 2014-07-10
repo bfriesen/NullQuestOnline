@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace NullQuestOnline.Models
+namespace NullQuestOnline.Game
 {
     public class Character : Combatant
     {

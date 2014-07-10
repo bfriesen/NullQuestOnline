@@ -1,6 +1,5 @@
 ﻿@using NullQuestOnline.Helpers
-@using NullQuestOnline.Models
-@model NullQuestOnline.Models.ViewModels.DungeonViewModel
+@model NullQuestOnline.Models.DungeonViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -9,12 +8,27 @@
 
 @section topleft
 {
-    @if (Model.Monster != null)
+    @if (Model.PlayerDead)
     {
         @Html.KeyOptions(null,
-            HtmlHelpers.KeyedOption.Create('1', "Attack", @Url.Action("Attack", "Dungeon")),
-            HtmlHelpers.KeyedOption.Create('2', "Flee", @Url.Action("Flee", "Dungeon"))
-        )
+                HtmlHelpers.KeyedOption.Create('3', "Load Last Save", @Url.Action("Index", "Town"))
+            )
+    }
+    else if (Model.Monster != null)
+    {
+        if (Model.MonsterDead)
+        {
+            @Html.KeyOptions(null,
+                HtmlHelpers.KeyedOption.Create('3', "Continue", @Url.Action("Index", "Dungeon"))
+            )
+        }
+        else
+        {
+            @Html.KeyOptions(null,
+                HtmlHelpers.KeyedOption.Create('1', "Attack", @Url.Action("Attack", "Dungeon")),
+                HtmlHelpers.KeyedOption.Create('2', "Flee", @Url.Action("Flee", "Dungeon"))
+            )
+        }
     }
     else
     {
@@ -47,14 +61,19 @@
 
 @section bottomright
 {
-    @if (Model.Monster != null)
-    {
-        <text>Combat Log</text>
-    }
-    else
-    {
-        <text>Image of a Dungeon</text>
-    }
+    <div style="font-size: 0.8em;">
+        @if (Model.Monster != null)
+        {
+            foreach (var log in (Model.CombatLog as IEnumerable<string>).Reverse().Take(21))
+            {
+                <text>@(new MvcHtmlString(log))<br /></text>
+            }
+        }
+        else
+        {
+            <text>Image of a Dungeon</text>
+        }
+    </div>
 }
 
 @section bottomleft

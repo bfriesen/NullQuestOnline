@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using NullQuestOnline.Models;
+using NullQuestOnline.Game;
 using XSerializer;
 
 namespace NullQuestOnline.Data

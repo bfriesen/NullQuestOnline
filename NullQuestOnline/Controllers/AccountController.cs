@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using NullQuestOnline.Data;
-using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
 using NullQuestOnline.Helpers;
 
@@ -57,20 +56,20 @@ namespace NullQuestOnline.Controllers
                 case "accept":
                     GameWorld world = accountRepository.LoadWorld(characterName);
 
-                    if (!world.Created)
+                    if (!world.IsAccepted)
                     {
-                        world.Created = true;
-                        world.Character.CurrentHitPoints = world.Character.MaxHitPoints;
-                        world.SavedCharacter = world.Character.DeepClone();
+                        world.Accept();
                         accountRepository.SaveWorld(world);
                     }
 
                     authHelper.SignIn(characterName);
 
                     return RedirectToAction("Index", "Town");
+
                 case "reroll":
                     return RedirectToAction("Create", new { characterName });
             }
+
             return RedirectToAction("Create", new { characterName });
         }
 

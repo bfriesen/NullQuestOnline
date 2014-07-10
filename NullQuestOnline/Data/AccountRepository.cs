@@ -26,7 +26,7 @@ namespace NullQuestOnline.Data
             var character = LoadWorld(characterName);
             if (character != null)
             {
-                return character.Created;
+                return character.IsAccepted;
             }
             return false;
         }

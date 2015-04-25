@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NullQuest.Game.Combat;
 using NullQuestOnline.Data;
+using NullQuestOnline.Extensions;
 using NullQuestOnline.Game;
 using NullQuestOnline.Game.Combat;
 using NullQuestOnline.Game.Factories;
@@ -100,7 +101,7 @@ namespace NullQuestOnline.Controllers
                                 !world.CurrentEncounter.Weapon.Equals(Weapon.BareHands))
                             {
                                 world.CombatLog.Add(string.Format("&nbsp;-&nbsp;^C{0}^N dropped ^V{1}^N",
-                                    world.CurrentEncounter.Name, world.CurrentEncounter.Weapon.Name));
+                                    world.CurrentEncounter.Name, world.CurrentEncounter.Weapon.GetLeveledName()));
                                 world.Character.AddItemToInventory(world.CurrentEncounter.Weapon);
                                 world.CurrentEncounter.Weapon = null;
                             }

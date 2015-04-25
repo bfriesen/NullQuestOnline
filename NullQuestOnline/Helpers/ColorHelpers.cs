@@ -36,25 +36,28 @@ namespace NullQuestOnline.Helpers
                         }
                         i++;
                     }
-                    if (str[i + 1] == 'K')
+                    else
                     {
-                        if (inTag)
+                        if (str[i + 1] == 'K')
                         {
-                            sb.Append("</span>");
+                            if (inTag)
+                            {
+                                sb.Append("</span>");
+                            }
+                            sb.Append("<span style=\"color: #FF0000; background-color: #CCCCCC;\">");
+                            inTag = true;
+                            i++;
                         }
-                        sb.Append("<span style=\"color: #FF0000; background-color: #CCCCCC;\">");
-                        inTag = true;
-                        i++;
-                    }
-                    if (colorCodes.ContainsKey(str[i + 1]))
-                    {
-                        if (inTag)
+                        if (colorCodes.ContainsKey(str[i + 1]))
                         {
-                            sb.Append("</span>");
+                            if (inTag)
+                            {
+                                sb.Append("</span>");
+                            }
+                            sb.AppendFormat("<span style=\"color: {0}; \">", colorCodes[str[i + 1]]);
+                            inTag = true;
+                            i++;
                         }
-                        sb.AppendFormat("<span style=\"color: {0}; \">", colorCodes[str[i + 1]]);
-                        inTag = true;
-                        i++;
                     }
                 }
                 else
@@ -64,7 +67,8 @@ namespace NullQuestOnline.Helpers
             }
             if (str.Length > 0)
             {
-                sb.Append(str[str.Length - 1]);
+                if(str[str.Length - 2] != '^')
+                    sb.Append(str[str.Length - 1]);
             }
             return new MvcHtmlString(sb.ToString());
         }
